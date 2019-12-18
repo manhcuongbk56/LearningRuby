@@ -1,4 +1,6 @@
 class Point
+  include Enumerable
+  include Comparable
   attr_reader :x, :y
   def intialize(x, y)
     @x, @y = x, y
@@ -41,6 +43,26 @@ class Point
 
   def to_s
     "#{@x}:#{@y}"
+  end
+
+  def ==(o)
+    if o.is_a? Point
+      @x==o.x && @y==o.y
+    end
+    false
+  end
+
+  def hash
+    code = 17
+    code = 37*code + @x.hash
+    code = 37*code + @y.hash
+    # Add lines like this for each significant instance variable
+    code
+  end
+
+  def <=>(other)
+    return nil unless other.instance_of? Point
+    @x**2 + @y**2 <=> other.x**2 + other.y**2
   end
 
 end
