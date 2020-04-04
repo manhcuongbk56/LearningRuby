@@ -5,7 +5,7 @@ class Point
   @@n = 0
   @@total_x = 0
   @@total_y = 0
-  def intialize(x, y)
+  def initialize(x, y)
     @x, @y = x, y
     @@n += 1
     @@total_x += x
@@ -87,6 +87,16 @@ class Point
       puts "Average Y coordinate: #{@@total_y.to_f/@@n}"
     end
   end
+  private_class_method :new
+
+  def self.cartesian(x, y) #Factory method for Cartesian coordinates
+    new(x, y)
+  end
+
+  def Point.polar(r, theta)
+    new(r*Math.cos(theta), r*Math.sin(theta))
+  end
+
 end
 
 # the new method of the class object creates a new instance object, and then it
